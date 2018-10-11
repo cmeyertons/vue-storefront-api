@@ -1,6 +1,7 @@
 version: '3.0'
 services:
   app:
+    command: yarn dev
     # image: divante/vue-storefront-api:latest
     build:
       context: .
@@ -9,17 +10,12 @@ services:
       - es1
       - redis
     env_file: docker/vue-storefront-api/default.env
-    environment:
-      VS_ENV: dev
     volumes:
-      - './config:/var/www/config'
-      - './ecosystem.json:/var/www/ecosystem.json'
       - './migrations:/var/www/migrations'
-      - './package.json:/var/www/package.json'
       - './scripts:/var/www/scripts'
       - './src:/var/www/src'
-      - './var:/var/www/var'
     tmpfs:
       - /var/www/dist
     ports:
       - '8080:8080'
+      - '9222:9222'
